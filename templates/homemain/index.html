@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-3">
+    {% if user.is_authenticated %}
+    <a>HI!! 로그인 됨 {{ user.name }}</a>
+    <a href="/board_list/">게시판 들어가기</a>
+    {% else %}
+    <a>HI!! WELCOME!! 로그아웃 상태</a>
+    {% endif %}
+</div>
+{% endblock %}
+

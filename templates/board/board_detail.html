@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>{{board_detail.id}}번째 Board!!</h1>
+  <h2>[ 타이틀 : {{board_detail.title}}  ]</h2>
+  <h3>내용 : {{ board_detail.content }} </h3>
+
+  <h3>댓글:</h3>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.text }}
+        <form action="/board/comments/{{ board_detail.id }}/delete/{{ comment.pk }}/" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="댓글 삭제">
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>댓글 남기기:</h3>
+  <form action = "/board/comment_create/{{ board_detail.id }}/" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">댓글 생성</button>
+  </form>
+  
+  <a href="/board/board_list/">홈화면으로 돌아가기</a>
+  </br>
+  <a href="/board/board_edit/{{board_detail.id}}">수정하기</a>  
+  </br>
+  <form action = "/board/delete/{{board_detail.id}}" method="GET">
+      <button type="submit">삭제</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" action="." novalidate>
+    {% csrf_token %}
+    <div>
+        <label name="label_user_id" for="{{ form.user_id.id_for_label }}">
+            {{ form.user_id.label }}
+        </label>
+        {{ form.user_id }}
+        <script type="text/javascript">
+            if (document.getElementsByName('user_id')[0].value != '') {
+                document.getElementsByName('label_user_id')[0].setAttribute('class', 'active');
+            }
+        </script>
+        {% if form.user_id.errors %}
+        <script type="text/javascript">
+            document.getElementsByName('user_id')[0].setAttribute('class', 'form-control is-invalid')
+        </script>
+        {% for error in form.user_id.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        <label name="label_password" for="{{ form.password.id_for_label }}">
+            {{ form.password.label }}
+        </label>
+        {{ form.password }}
+        <script type="text/javascript">
+            if (document.getElementsByName('passwordd')[0].value != '') {
+                document.getElementsByName('label_password')[0].setAttribute('class', 'active');
+            }
+        </script>
+        {% if form.password.errors %}
+        <script type="text/javascript">
+            document.getElementsByName('password')[0].setAttribute('class', 'form-control is-invalid')
+        </script>
+        {% for error in form.password.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <button type="submit" style="opacity: 90%; font-size: 16px; margin-top: -5px;" class="btn btn-red btn-lg btn-block">로그인</button>
+</form>
+<a  style="opacity: 90%; font-size: 16px; margin-top: -5px;" class="btn btn-red btn-lg btn-block" href="{% url 'accounts:signup' %}">회원가입</a>
+{% endblock %}

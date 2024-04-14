@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>목록</title>
+</head>
+<body>
+  <h1> 목록 </h1>
+    <ul>
+      첫 번째 게시물 재목은 {{ list1.title }}
+    </br>다음 제목
+      {% for item in lists %}
+      <a href="/board/board_detail/{{item.id}}">
+      
+        <li>
+          <div>
+            {{ item.title }}	
+          </div>
+          
+        </li>
+      </a>
+      
+      {% endfor %}
+    </ul>
+    <form action="/board/create_board/" method="get">
+      
+      <button type="submit">글쓰기</button>
+    </form>
+</body>
+</html>
